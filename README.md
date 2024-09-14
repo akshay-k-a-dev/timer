@@ -48,3 +48,4 @@ Want to experience the thrill of time-keeping? Check out the live version here: 
 
 This stopwatch may cause existential dread as you realize how much time has passed since you started staring at your screen. But don't worry, you can always reset and start over!
 Enjoy your journey through time!
+##
