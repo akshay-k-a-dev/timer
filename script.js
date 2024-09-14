@@ -31,7 +31,7 @@ startBtn.addEventListener('click', () => {
         }
 
         // Decrement the countdown value
-        if (countdown === 0) {
+        if (countdown > 0) {
             countdown--;
         }
     }, 1000);
