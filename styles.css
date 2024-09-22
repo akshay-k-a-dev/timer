@@ -67,3 +67,14 @@ button {
 button:hover {
     background-color: #e63900;
 }
+        .input-container {
+            display: flex;
+            align-items: center; /* Align items vertically in the center */
+            gap: 15px; /* Space between each input and label */
+        }
+        label {
+            margin-right: 5px; /* Space between label and input */
+        }
+        input {
+            width: 60px; /* Fixed width for input fields */
+        }
