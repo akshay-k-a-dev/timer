@@ -1,14 +1,3 @@
-<!-- HTML Part -->
-<div>
-    <input type="text" id="timeInput" placeholder="HH:MM:SS" />
-    <button id="startBtn">Start</button>
-    <button id="resetBtn">Reset</button>
-</div>
-<div id="timer">00:00:00</div>
-<audio id="beep-sound" src="beep.mp3"></audio>
-
-<script>
-// JavaScript Part
 const timerElement = document.getElementById('timer');
 const beepSound = document.getElementById('beep-sound');
 const startBtn = document.getElementById('startBtn');
@@ -84,4 +73,3 @@ function formatTime(totalSeconds) {
     const secs = totalSeconds % 60;
     return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
-</script>
