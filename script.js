@@ -22,16 +22,17 @@ startBtn.addEventListener('click', () => {
         // Play beep sound once at 10 seconds remaining
         if (countdown === 10 && !beepPlayed) {
             beepSound.play();
-            beepPlayed = true; // Ensure beep plays only once
+            beepPlayed = true; // Ensure beep plays only once at 10 seconds
         }
 
-        // When the countdown reaches 0, stop the timer
+        // Play beep when the countdown reaches 0
         if (countdown === 0) {
+            beepSound.play(); // Play final beep at 0 seconds
             clearInterval(timerInterval); // Stop the timer
         }
 
         // Decrement the countdown value
-        if (countdown === 0) {
+        if (countdown > 0) {
             countdown--;
         }
     }, 1000);
@@ -40,9 +41,11 @@ startBtn.addEventListener('click', () => {
 // Add functionality for the reset button
 resetBtn.addEventListener('click', () => {
     clearInterval(timerInterval); // Stop the timer
-    timerElement.innerText = '00:00'; // Reset the timer display
+    timerElement.innerText = '00:00'; // Reset the timer display to 00:00
     timeInput.value = ''; // Clear the input field
     beepPlayed = false; // Reset beep flag
+    beepSound.pause();  // Stop the beep sound
+    beepSound.currentTime = 0; // Reset beep sound to start
 });
 
 // Format the time to MM:SS format
