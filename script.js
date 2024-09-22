@@ -1,3 +1,14 @@
+<!-- HTML Part -->
+<div>
+    <input type="text" id="timeInput" placeholder="HH:MM:SS" />
+    <button id="startBtn">Start</button>
+    <button id="resetBtn">Reset</button>
+</div>
+<div id="timer">00:00:00</div>
+<audio id="beep-sound" src="beep.mp3"></audio>
+
+<script>
+// JavaScript Part
 const timerElement = document.getElementById('timer');
 const beepSound = document.getElementById('beep-sound');
 const startBtn = document.getElementById('startBtn');
@@ -8,7 +19,7 @@ let timerInterval; // Variable to store the interval
 let beepPlayed = false; // Flag to ensure beep is played only once at 10 seconds
 
 startBtn.addEventListener('click', () => {
-    let countdown = parseInt(timeInput.value) || 60; // Get user input or default to 60 seconds
+    let countdown = parseTimeInput(timeInput.value) || 3600; // Parse input into seconds or default to 1 hour (3600s)
 
     // Clear any existing interval if the button is pressed again
     clearInterval(timerInterval);
@@ -41,16 +52,36 @@ startBtn.addEventListener('click', () => {
 // Add functionality for the reset button
 resetBtn.addEventListener('click', () => {
     clearInterval(timerInterval); // Stop the timer
-    timerElement.innerText = '00:00'; // Reset the timer display to 00:00
+    timerElement.innerText = '00:00:00'; // Reset the timer display to 00:00:00
     timeInput.value = ''; // Clear the input field
     beepPlayed = false; // Reset beep flag
     beepSound.pause();  // Stop the beep sound
     beepSound.currentTime = 0; // Reset beep sound to start
 });
 
-// Format the time to MM:SS format
-function formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+// Parse time input in HH:MM:SS format and convert it to seconds
+function parseTimeInput(input) {
+    const timeParts = input.split(':').map(part => parseInt(part, 10) || 0);
+    
+    let seconds = 0;
+    if (timeParts.length === 3) { // HH:MM:SS format
+        const [hours, minutes, secs] = timeParts;
+        seconds = (hours * 3600) + (minutes * 60) + secs;
+    } else if (timeParts.length === 2) { // MM:SS format
+        const [minutes, secs] = timeParts;
+        seconds = (minutes * 60) + secs;
+    } else if (timeParts.length === 1) { // SS format
+        seconds = timeParts[0];
+    }
+
+    return seconds;
 }
+
+// Format the time to HH:MM:SS format
+function formatTime(totalSeconds) {
+    const hours = Math.floor(totalSeconds / 3600);
+    const mins = Math.floor((totalSeconds % 3600) / 60);
+    const secs = totalSeconds % 60;
+    return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+}
+</script>
