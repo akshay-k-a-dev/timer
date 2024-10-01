@@ -32,15 +32,13 @@ startBtn.addEventListener('click', () => {
             beepPlayed = true; // Ensure beep plays only once at 10 seconds
         }
 
-        // Play beep when the countdown reaches 0
-        if (countdown === 0) {
-            beepSound.play(); // Play final beep at 0 seconds
-            clearInterval(timerInterval); // Stop the timer
-        }
-
         // Decrement the countdown value
         if (countdown > 0) {
             countdown--;
+        } else {
+            // Play final beep at 0 seconds
+            beepSound.play();
+            clearInterval(timerInterval); // Stop the timer
         }
     }, 1000);
 });
